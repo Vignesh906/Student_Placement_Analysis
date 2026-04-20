@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Placement Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="main">
+<div class="card">
+<h1>Placement Predictor</h1>
+
+<form action="/predict" method="post">
+<div class="grid">
+
+<select name="gender" required>
+<option value="">Gender</option>
+<option>Male</option>
+<option>Female</option>
+</select>
+
+<select name="work_experience" required>
+<option value="">Work Experience</option>
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+
+<select name="ssc_board" required>
+<option value="">SSC Board</option>
+<option>State</option>
+<option>CBSE</option>
+<option>ICSE</option>
+</select>
+
+<input name="ssc_percentage" placeholder="SSC %" required>
+
+<select name="hsc_board" required>
+<option value="">HSC Board</option>
+<option>State</option>
+<option>CBSE</option>
+<option>ICSE</option>
+</select>
+
+<input name="hsc_percentage" placeholder="HSC %" required>
+
+<select name="degree_stream" required>
+<option value="">Stream</option>
+<option>CSE</option>
+<option>ECE</option>
+<option>EEE</option>
+<option>IT</option>
+<option>MECH</option>
+</select>
+
+<input name="cgpa" placeholder="CGPA (0-10)" required>
+
+<input name="backlogs" placeholder="Backlogs" required>
+
+<select name="university" required>
+<option value="">University</option>
+<option>JNTU</option>
+<option>Osmania</option>
+<option>Anna University</option>
+<option>VTU</option>
+</select>
+
+<input name="coding_score" placeholder="Coding Score (0-100)" required>
+<input name="communication_score" placeholder="Communication Score (0-100)" required>
+<input name="aptitude_score" placeholder="Aptitude Score (0-100)" required>
+<input name="internships" placeholder="Internships" required>
+<input name="projects" placeholder="Projects" required>
+<input name="certifications" placeholder="Certifications" required>
+
+</div>
+
+<button type="submit">Predict</button>
+</form>
+
+<div class="result">
+{% if prediction_text %}
+<p style="color: {{ color }}">{{ prediction_text }}</p>
+
+<div class="progress-bar">
+<div class="progress" data-width="{{ probability }}" style="background: {{ color }}">
+{{ probability|round(1) }}%
+</div>
+</div>
+{% endif %}
+</div>
+
+</div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
